@@ -9,5 +9,6 @@ int main(int argc, char *argv[])
     w.show();
     //Ìí¼Ó´úÂë×¢ÊÍ
     //12346
+    //45+789
     return a.exec();
 }

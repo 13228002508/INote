@@ -8,5 +8,6 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
     //Ìí¼Ó´úÂë×¢ÊÍ
+    //12346
     return a.exec();
 }

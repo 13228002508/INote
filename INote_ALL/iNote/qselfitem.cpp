@@ -30,10 +30,8 @@ void QSelfItem::InitUi()
 	QFont qfont;
 	qfont.setPointSize(8);
 	pLabel->setFont(qfont);
-	int istrWindth;
-	int istrHeight;
-	//int istrWindth = QFontMetrics(pLabel->font()).width(m_strFileName);//计算文本长度
-	//int istrHeight = QFontMetrics(pLabel->font()).height();//计算文本高度
+	int istrWindth = QFontMetrics(pLabel->font()).boundingRect(m_strFileName).width();//计算文本长度
+	int istrHeight = QFontMetrics(pLabel->font()).height();//计算文本高度
 	QRect QplableRect = pLabel->geometry();
 	int pLableWid = QplableRect.width() < istrWindth ? istrWindth + 5 : QplableRect.width();
 	int plableHeight = QplableRect.height() < istrHeight ? istrHeight + 3 : QplableRect.height();
@@ -44,8 +42,8 @@ void QSelfItem::InitUi()
 	QLabel* pTimelable = new QLabel(this);
 	pTimelable->setStyleSheet("Color:gray");
 	pTimelable->setFont(qfont);
-	//istrWindth = QFontMetrics(pTimelable->font()).width(m_strFileLastModifyData);//计算文本长度
-	//istrHeight = QFontMetrics(pTimelable->font()).height();//计算文本高度
+	istrWindth = QFontMetrics(pTimelable->font()).boundingRect(m_strFileLastModifyData).width();//计算文本长度
+	istrHeight = QFontMetrics(pTimelable->font()).height();//计算文本高度
 	pTimelable->move(m_ParentWidth - istrWindth -10,5);
 	pTimelable->resize(istrWindth, plableHeight);
 	pTimelable->setText(m_strFileLastModifyData);
@@ -55,8 +53,8 @@ void QSelfItem::InitUi()
 	pfileNamelable->setStyleSheet("Color:black");
 	qfont.setPointSize(16);
 	pfileNamelable->setFont(qfont);
-	//istrWindth = QFontMetrics(pfileNamelable->font()).width(m_strFileName);//计算文本长度
-	//istrHeight = QFontMetrics(pfileNamelable->font()).height();//计算文本高度
+	istrWindth = QFontMetrics(pfileNamelable->font()).boundingRect(m_strFileName).width();//计算文本长度
+	istrHeight = QFontMetrics(pfileNamelable->font()).height();//计算文本高度
 	QplableRect = pfileNamelable->geometry();
 	pLableWid = QplableRect.width() < istrWindth ? istrWindth + 5 : QplableRect.width();
 	plableHeight = QplableRect.height() < istrHeight ? istrHeight + 3 : QplableRect.height();

@@ -24,7 +24,7 @@ void QSelfItem::SetParetControlWidth(int tWidth)
 
 void QSelfItem::InitUi()
 {
-	//文件夹名称
+	//文件夹名称123
 	QLabel* pLabel = new QLabel(this);
 	pLabel->setStyleSheet("Color:gray");
 	QFont qfont;

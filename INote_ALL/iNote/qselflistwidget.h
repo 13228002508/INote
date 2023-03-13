@@ -9,6 +9,9 @@ class QSelfListWidget : public QListWidget
 public:
     QSelfListWidget(QWidget *paretn);
 	void InitListData(QList<QFileInfo> *fileInfo);
+	void SetParentWidth(int Wid);
+private:
+	int  m_Wid;
 };
 
 #endif // QSELFLISTWIDGET_H

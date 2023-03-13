@@ -1,6 +1,6 @@
 #pragma once
-const float f_leftWindowWidth = 2;
-const float f_RightWindowWidth = 8;
+const float f_leftWindowWidth = 0.2;
+const float f_RightWindowWidth = 0.8;
 //typedef std::map<QString> 
 #ifdef WIN32
 #pragma excution_character_set("utf-8")
@@ -13,7 +13,7 @@ enum FileType
 	No_Temp
 };
 
-
+ 
 struct INOTE_FILEDATA
 {
 	FileType iFileType;

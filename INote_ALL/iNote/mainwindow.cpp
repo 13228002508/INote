@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "qmessagebox.h"
-#include "qsplitter.h"
 #include "qfile.h"
 #include "QFileDialog"
 #include "QMessageBox"
@@ -16,8 +15,10 @@ MainWindow::MainWindow(QWidget *parent) :
 	this->setStyleSheet(QString("QWidget{background - color: rgb(245, 245, 245);border-color:rgb(245, 245, 245);}"));
 	SplitWindow();
 	InitWindow();
+    
 	on_actionShowSiderbar_triggered();
 	QObject::connect(m_pLeftWidget, SIGNAL(UserSelectClickFile(INOTE_FILEDATA)), this, SLOT(UserSelectFileChanged(INOTE_FILEDATA)));
+	QObject::connect(m_pQSplit, SIGNAL(splitterMoved(int,int)), this, SLOT(OnQSplitMove(int, int)));
 }
 
 MainWindow::~MainWindow()
@@ -27,7 +28,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionOpen_triggered()
 {
-
+			m_pLeftWidget->SetCtrlWidth(0.2 * this->width());
 	QString curPath = QCoreApplication::applicationDirPath();
 	QFileDialog fileDialog;
 	QString strTitle = "Slect file";
@@ -132,16 +133,16 @@ void MainWindow::on_actionfileList_triggered()
 
 void MainWindow::SplitWindow()
 {
-	QSplitter* pQSplit = new QSplitter(this);
+	 m_pQSplit = new QSplitter(this);
 	//代码的方式添加QStyle
-	this->setCentralWidget(pQSplit);
+	this->setCentralWidget(m_pQSplit);
 	m_pLeftWidget = new QLeftWidget;
 	//m_pRightWidget = new QRightWidget;
 	m_PRightWidget2 = new QRightWidget2;
-	pQSplit->addWidget(m_pLeftWidget);
-	pQSplit->addWidget(m_PRightWidget2);
-	pQSplit->setStretchFactor(0, f_leftWindowWidth);
-	pQSplit->setStretchFactor(1, f_RightWindowWidth);
+	m_pQSplit->addWidget(m_pLeftWidget);
+	m_pQSplit->addWidget(m_PRightWidget2);
+	m_pQSplit->setStretchFactor(0, f_leftWindowWidth * this->width());
+	m_pQSplit->setStretchFactor(1, f_RightWindowWidth * this->width());
 }
 
 void MainWindow::InitStyleShet()
@@ -195,15 +196,18 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::on_actionantTionOpenFilePath_triggered()
 {
+	int sss = this->width();
 	//seleft file Path
 	m_PRightWidget2->ClearAllOpenTrueExistFIle();
 	m_pLeftWidget->ClearAllData();
+	int iWid = m_pLeftWidget->width();
 	QString curPath = QCoreApplication::applicationDirPath();
 	QString digTitle = "Select ";
 	QString selectDir = QFileDialog::getExistingDirectory(this, digTitle, curPath, QFileDialog::ShowDirsOnly);
 	//Get All Txt files
 	if (!selectDir.isEmpty())
 	{
+		m_pLeftWidget->SetCtrlWidth(0.2 * this->width());
 		QDir * dir = new QDir(selectDir);
 		QStringList filter;
 		filter << QStringLiteral("*.txt");
@@ -241,6 +245,13 @@ void MainWindow::on_Open_file_Path(QString strfilePath)
 	QList<QFileInfo> *fileInfo = new QList<QFileInfo>(pdir->entryInfoList(filter));
 	if (nullptr != fileInfo)
 		m_pLeftWidget->SetFileNameData(fileInfo);
+}
+
+void MainWindow::OnQSplitMove(int pos, int index)
+{
+    //刷新左侧视图区域 
+	m_pLeftWidget->SetCtrlWidth(pos);
+	m_pLeftWidget->UpdateCtrl();
 }
 
 

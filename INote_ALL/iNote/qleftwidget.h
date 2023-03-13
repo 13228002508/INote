@@ -18,12 +18,15 @@ public:
     ~QLeftWidget();
 	void SetFileNameData(QList<QFileInfo> *fileInfo);
 	void ClearAllData();
+	inline void SetCtrlWidth(int Width) { m_Width = Width; };
+	void UpdateCtrl();
  signals:
 	void  UserSelectClickFile(INOTE_FILEDATA fileData);
 	  
 private:
     Ui::QLeftWidget *ui;
 	QList<QFileInfo> *m_pfileInfo;
+	int m_Width;
 protected:
 	void paintEvent(QPaintEvent *event) override;
 private slots:

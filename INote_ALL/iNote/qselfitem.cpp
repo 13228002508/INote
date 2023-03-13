@@ -4,7 +4,7 @@
 #include "QLabel"
 QSelfItem::QSelfItem(QWidget *paretn) : QWidget(paretn)
 {
-	InitUi();
+	//InitUi();
 }
 
 void QSelfItem::SetFileName(QString strFileName)
@@ -44,7 +44,7 @@ void QSelfItem::InitUi()
 	pTimelable->setFont(qfont);
 	istrWindth = QFontMetrics(pTimelable->font()).boundingRect(m_strFileLastModifyData).width();//计算文本长度
 	istrHeight = QFontMetrics(pTimelable->font()).height();//计算文本高度
-	pTimelable->move(m_ParentWidth - istrWindth -10,5);
+	pTimelable->move(m_ParentWidth - istrWindth - 5,5);
 	pTimelable->resize(istrWindth, plableHeight);
 	pTimelable->setText(m_strFileLastModifyData);
 

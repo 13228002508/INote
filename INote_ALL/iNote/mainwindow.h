@@ -6,6 +6,7 @@
 #include "qleftwidget.h"
 #include "qrightwidget.h"
 #include "qrightwidget2.h"
+#include "qsplitter.h"
 
 namespace Ui {
 class MainWindow;
@@ -34,15 +35,11 @@ private slots:
     void on_actionShowSiderbar_triggered();
     void on_actionfileOutLine_triggered();
     void on_actionfileList_triggered();
-
     void on_actionantTionOpenFilePath_triggered();
-
 	void UserSelectFileChanged(INOTE_FILEDATA FileData);
-
     void on_actSave_triggered();
-
 	void on_Open_file_Path(QString strfilePath);
-
+    void OnQSplitMove(int pos, int index);
 
 private:
     Ui::MainWindow *ui;
@@ -51,6 +48,7 @@ private:
 	QRightWidget2* m_PRightWidget2;
 	QString   m_CurrentFileName;
 	bool      m_IsShowRightControl;
+    QSplitter*  m_pQSplit;
 private:
 	void SplitWindow();
 	void InitStyleShet();

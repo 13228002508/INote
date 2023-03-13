@@ -35,12 +35,19 @@ QLeftWidget::~QLeftWidget()
 void QLeftWidget::SetFileNameData(QList<QFileInfo> *fileInfo)
 {
 	m_pfileInfo = fileInfo;
-	ui->m_listWidget->InitListData(m_pfileInfo);
+	UpdateCtrl();
 }
 
 void QLeftWidget::ClearAllData()
 {
 	ui->m_listWidget->clear();
+}
+
+void QLeftWidget::UpdateCtrl()
+{
+	ui->m_listWidget->clear();
+	ui->m_listWidget->SetParentWidth(m_Width);
+	ui->m_listWidget->InitListData(m_pfileInfo);
 }
 
 void QLeftWidget::paintEvent(QPaintEvent *event)
